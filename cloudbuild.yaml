@@ -1,0 +1,6 @@
+steps:
+- name: gcr.io/cloud-builders/gcloud
+  args: ["secrets", "scan", "app.tar.gz"]
+- name: gcr.io/cloud-builders/gcloud
+  args: ["artifacts", "docker", "push", "europe-west9-docker.pkg.dev/tp-ops-447412/app-repo/app.tar.gz"]
+images: ["europe-west9-docker.pkg.dev/tp-ops-447412/app-repo/app.tar.gz"]

@@ -1,0 +1,15 @@
+{
+  "builders": [{
+    "type": "googlecompute",
+    "project_id": "tp-ops-447412",
+    "zone": "europe-west9-a",
+    "machine_type": "e2-micro",
+    "source_image_family": "debian-11",
+    "image_name": "app-image-{{timestamp}}",
+    "ssh_username": "packer"
+  }],
+  "provisioners": [{
+    "type": "ansible",
+    "playbook_file": "playbook.yml"
+  }]
+}

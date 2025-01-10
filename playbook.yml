@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Extract app.tar.gz
+      unarchive:
+        src: /tmp/app.tar.gz
+        dest: /usr/local/bin/
+        remote_src: yes
+    - name: Create systemd service
+      copy:
+        content: |
+          [Unit]
+          Description=App Service
+          [Service]
+          ExecStart=/usr/local/bin/app
+          Restart=always
+          [Install]
+          WantedBy=multi-user.target
+        dest: /etc/systemd/system/app.service
+    - name: Enable app service
+      command: systemctl enable app.service
